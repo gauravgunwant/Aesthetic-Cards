@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Row Based Profile Cards</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background: radial-gradient(circle at 20% 20%, #111 0%, #0a0a0a 40%, #000 100%);
+    color:#fff;
+    padding:40px 20px;
+}
+
+
+.form-container{
+    max-width:500px;
+    margin:auto;
+    padding:30px;
+    border-radius:25px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    backdrop-filter: blur(25px);
+    border:1px solid rgba(0,255,255,0.15);
+    box-shadow:
+        0 0 40px rgba(0,255,255,0.08),
+        inset 0 0 30px rgba(255,255,255,0.03);
+    transition:0.4s ease;
+}
+
+.form-container:hover{
+    box-shadow:
+        0 0 60px rgba(0,255,255,0.15),
+        inset 0 0 40px rgba(255,255,255,0.05);
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:12px 15px;
+    background: rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:12px;
+    color:#fff;
+    outline:none;
+    transition:0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:#00f2ff;
+    box-shadow:0 0 15px rgba(0,242,255,0.4);
+}
+
+textarea{
+    resize:none;
+    height:90px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background: linear-gradient(90deg,#00f2ff,#7b2cff);
+    color:#000;
+    font-weight:700;
+    letter-spacing:1px;
+    cursor:pointer;
+    transition:0.4s;
+    box-shadow:0 0 20px rgba(0,242,255,0.4);
+}
+
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 30px rgba(123,44,255,0.6);
+}
+
+.cards-container{
+    margin-top:60px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:30px;
+    justify-content:center;
+}
+
+.card{
+    width:340px;
+    padding:25px;
+    border-radius:22px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    backdrop-filter: blur(20px);
+    border:1px solid rgba(0,255,255,0.15);
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.8),
+        0 0 25px rgba(0,255,255,0.05);
+    transition:0.4s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle, rgba(0,242,255,0.08), transparent 60%);
+    transform:rotate(25deg);
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:
+        0 15px 60px rgba(0,0,0,1),
+        0 0 40px rgba(123,44,255,0.3);
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:15px;
+}
+
+.profile-top img{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid transparent;
+    background: linear-gradient(#000,#000) padding-box,
+                linear-gradient(135deg,#00f2ff,#7b2cff) border-box;
+}
+
+.profile-info h3{
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:0.5px;
+}
+
+.profile-info p{
+    font-size:14px;
+    color:#9ca3af;
+    margin-top:4px;
+}
+
+.about h4{
+    font-size:14px;
+    margin-bottom:8px;
+    color:#00f2ff;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.about p{
+    font-size:14px;
+    color:#d1d5db;
+    line-height:1.6;
+}
+
+.search-container{
+    max-width:500px;
+    margin:40px auto 0;
+    padding:20px 25px;
+    border-radius:20px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    backdrop-filter: blur(20px);
+    border:1px solid rgba(0,255,255,0.15);
+    box-shadow:
+        0 0 40px rgba(0,255,255,0.08),
+        inset 0 0 20px rgba(255,255,255,0.03);
+}
+
+.search-container label{
+    display:block;
+    margin-bottom:10px;
+    font-size:14px;
+    letter-spacing:1px;
+    color:#00f2ff;
+    text-transform:uppercase;
+}
+
+.search-container input{
+    width:100%;
+    padding:12px 15px;
+    background: rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:12px;
+    color:#fff;
+    outline:none;
+    transition:0.3s;
+}
+
+.search-container input:focus{
+    border-color:#7b2cff;
+    box-shadow:0 0 20px rgba(123,44,255,0.5);
+}
+
+@media(max-width:600px){
+    .card{
+        width:100%;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="form-container">
+
+    <div class="form-group">
+        <input type="text" id="full-name" placeholder="Full Name">
+    </div>
+
+    <div class="form-group">
+        <input type="text" id="occupation" placeholder="Occupation">
+    </div>
+
+    <div class="form-group">
+        <input type="text" id="pfp-url" placeholder="Profile Picture URL">
+    </div>
+
+    <div class="form-group">
+        <textarea placeholder="About Him" id="about-me"></textarea>
+    </div>
+
+    <button type="submit" class="submit">Add Card</button>
+
+</div>
+
+<!-- Cards Display Area -->
+<div class="search-container">
+    <label for="sFilter">Search The User!</label>
+    <input type="search" name="searchFilter" id="sFilter" placeholder="Type name to search...">
+</div>
+
+<div class="cards-container">
+
+    <!-- Example Card -->
+    <!-- <div class="card">
+        <div class="profile-top">
+            <img src="https://via.placeholder.com/150" alt="Profile">
+            <div class="profile-info">
+                <h3>Rahul Sharma</h3>
+                <p>Frontend Developer</p>
+            </div>
+        </div>
+
+        <div class="about">
+            <h4>About Him</h4>
+            <p>Loves aesthetic UI and dark theme designs.</p>
+        </div>
+    </div> -->
+
+
+
+</div>
+<script src="aestheticCards.js"></script>
+</body>
+</html>
