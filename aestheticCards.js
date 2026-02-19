@@ -118,6 +118,7 @@ let debouncer = function(func, delay){
 let searchF = document.querySelector("#sFilter");
 
 let searchHandler = function() {
+    cardContainer.innerHTML = "";  
     let newDetails = details.filter(function(ele){
         return ele.name.toLowerCase().startsWith(searchF.value.toLowerCase());   
     })
