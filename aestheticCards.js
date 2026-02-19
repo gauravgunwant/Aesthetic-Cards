@@ -46,6 +46,7 @@ submitBtn.addEventListener("click",function(e){
    
 })
 
+
 function cardAdder(obj){
 
     let createDiv = document.createElement('div');
@@ -100,9 +101,23 @@ function cardAdder(obj){
 // loading from local storage!
 details.forEach(user => cardAdder(user));
 
+
+let debouncer = function(func, delay){
+    let timer;
+    return function(){
+        clearTimeout(timer);
+
+        timer = setTimeout(function(){
+            let cntx = this;
+            let args = arguments;
+            func.apply(cntx,args);
+        },delay)
+    }
+}
+
 let searchF = document.querySelector("#sFilter");
 
-searchF.addEventListener("input", function(){
+let searchHandler = function() {
     let newDetails = details.filter(function(ele){
         return ele.name.toLowerCase().startsWith(searchF.value.toLowerCase());   
     })
@@ -118,7 +133,13 @@ searchF.addEventListener("input", function(){
     })
 
     console.log(newDetails);
-})
+}
+
+let dHandler = debouncer(searchHandler,300);
+searchF.addEventListener("input", dHandler);
+
+
+
 // function defaultLoader(obj){
  
 //     if(obj.length!==0){
